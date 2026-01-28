@@ -1,0 +1,30 @@
+[
+  {
+    "type": "list",
+    "label": "Pets",
+    "maxNumber": 5,
+    "components": [
+      {
+        "key": "h-1",
+        "type": "section-header",
+        "label": "Please give more information about this pet"
+      },
+      {
+        "key": "microchip_number",
+        "type": "text",
+        "label": "If they are microchipped, please provide the microchip number"
+      },
+      {
+        "key": "vet_code",
+        "type": "text",
+        "label": "Provide their vet's registration code"
+      },
+      {
+        "key": "travel",
+        "type": "checkbox",
+        "label": "Does your pet travel frequently or stay at a boarding facility?"
+      }
+    ],
+    "outputPathList": "pets"
+  }
+]

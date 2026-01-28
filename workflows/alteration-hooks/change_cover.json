@@ -1,0 +1,168 @@
+[
+  {
+    "key": "h-cover",
+    "type": "section-header",
+    "label": "Cover details",
+    "props": {
+      "headingTag": "h3"
+    }
+  },
+  {
+    "key": "area_code",
+    "type": "text",
+    "label": "When is the area code? *",
+    "validators": [
+      {
+        "validation": {
+          "type": "required"
+        }
+      }
+    ]
+  },
+  {
+    "key": "reimbursement",
+    "type": "select",
+    "label": "Select the reimbursement package? *",
+    "options": [
+      {
+        "label": "90.0%",
+        "value": "90.0%"
+      },
+      {
+        "label": "80.0%",
+        "value": "80.0%"
+      },
+      {
+        "label": "70.0%",
+        "value": "70.0%"
+      },
+      {
+        "label": "65.0%",
+        "value": "65.0%"
+      }
+    ],
+    "validators": [
+      {
+        "validation": {
+          "type": "required"
+        }
+      }
+    ]
+  },
+  {
+    "key": "annual_deductible",
+    "type": "select",
+    "label": "Select the annual deductible? *",
+    "options": [
+      {
+        "label": "R2,000",
+        "value": "R2,000"
+      },
+      {
+        "label": "R4,000",
+        "value": "R4,000"
+      },
+      {
+        "label": "R5,000",
+        "value": "R5,000"
+      },
+      {
+        "label": "R6,000",
+        "value": "R6,000"
+      },
+      {
+        "label": "R8,000",
+        "value": "R8,000"
+      },
+      {
+        "label": "R10,000",
+        "value": "R10,000"
+      },
+      {
+        "label": "R12,000",
+        "value": "R12,000"
+      },
+      {
+        "label": "R14,000",
+        "value": "R14,000"
+      },
+      {
+        "label": "R15,000",
+        "value": "R15,000"
+      },
+      {
+        "label": "R16,000",
+        "value": "R16,000"
+      },
+      {
+        "label": "R18,000",
+        "value": "R18,000"
+      },
+      {
+        "label": "R20,000",
+        "value": "R20,000"
+      },
+      {
+        "label": "R25,000",
+        "value": "R25,000"
+      },
+      {
+        "label": "R30,000",
+        "value": "R30,000"
+      }
+    ],
+    "validators": [
+      {
+        "validation": {
+          "type": "required"
+        }
+      }
+    ]
+  },
+  {
+    "key": "annual_limit",
+    "type": "select",
+    "label": "Select the annual limit? *",
+    "options": [
+      {
+        "label": "R40,000",
+        "value": "R40,000"
+      },
+      {
+        "label": "R100,000",
+        "value": "R100,000"
+      },
+      {
+        "label": "R160,000",
+        "value": "R160,000"
+      },
+      {
+        "label": "R200,000",
+        "value": "R200,000"
+      },
+      {
+        "label": "R280,000",
+        "value": "R280,000"
+      },
+      {
+        "label": "R300,000",
+        "value": "R300,000"
+      },
+      {
+        "label": "R400,000",
+        "value": "R400,000"
+      },
+      {
+        "label": "R600,000",
+        "value": "R600,000"
+      }
+    ],
+    "validators": [
+      {
+        "validation": {
+          "type": "required"
+        }
+      }
+    ]
+  }
+]

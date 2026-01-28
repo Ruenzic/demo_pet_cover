@@ -1,0 +1,31 @@
+{
+  "version": "2026.01.28.1",
+  "generated_at": "2026-01-28T13:29:53.377Z",
+  "base_url": "https://sandbox.rootplatform.com/v1/insurance/docs/ai-context",
+  "sections": {
+    "configuration-guide": {
+      "hash": "d27f73d3",
+      "size": 21061
+    },
+    "product-module-code": {
+      "hash": "a70327c1",
+      "size": 95616
+    },
+    "schema-form": {
+      "hash": "17ab60b6",
+      "size": 19815
+    },
+    "claim-blocks": {
+      "hash": "0b68e162",
+      "size": 15737
+    },
+    "workbench-cli": {
+      "hash": "7a1ef769",
+      "size": 8135
+    },
+    "embed-config": {
+      "hash": "e2bb451b",
+      "size": 24263
+    }
+  }
+}

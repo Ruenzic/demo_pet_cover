@@ -1,0 +1,219 @@
+{
+  "$schema": "https://sandbox.rootplatform.com/v1/cli/json-schemas/root-config",
+  "productModuleName": "Example Pet Cover",
+  "productModuleKey": "demo_pet_cover",
+  "organizationId": {
+    "str": "11d99a52-703f-4750-8c9d-44ecfa4cbf38"
+  },
+  "host": "https://sandbox.rootplatform.com",
+  "codeFileOrder": [
+    "main.js",
+    "00-csv-breeds.js",
+    "00-csv-discounts.js",
+    "00-csv-pricing-factor-age.js",
+    "00-csv-pricing-factor-annual-deductible.js",
+    "00-csv-pricing-factor-annual-limit.js",
+    "00-csv-pricing-factor-area.js",
+    "00-csv-pricing-factor-breed.js",
+    "00-csv-pricing-factor-gender.js",
+    "00-csv-pricing-factor-reimbursement.js",
+    "00-helper-csv-sheet-wrapper.js",
+    "01-helper-pricing-sheets.js",
+    "02-quote-hook.js",
+    "03-application-hook.js",
+    "04-policy-issue-hook.js",
+    "05a-alteration-validate-request.js",
+    "05b-alteration-get.js",
+    "06-reactivations.js",
+    "07-schedule-functions.js"
+  ],
+  "settings": {
+    "policySchemeType": "individual",
+    "dashboardIssuingEnabled": true,
+    "activatePoliciesOnEvent": "policy_issued",
+    "defaultStatus": "pending_initial_payment",
+    "canReactivatePolicies": false,
+    "notTakenUp": {
+      "enabled": true,
+      "failedPaymentsBeforeNTU": 1
+    },
+    "preventPolicyLapseAndNTU": false,
+    "welcomeLetterEnabled": false,
+    "policyDocuments": [
+      {
+        "type": "terms",
+        "fileName": "policy_{{ policy.policy_number }}_terms"
+      },
+      {
+        "type": "policy_schedule",
+        "fileName": "policy_{{ policy.policy_number }}_schedule"
+      },
+      {
+        "type": "certificate",
+        "enabled": false
+      }
+    ],
+    "canRequote": false,
+    "gracePeriod": {
+      "lapseOn": {
+        "afterFirstMissedPayment": {
+          "period": 31,
+          "periodType": "days"
+        },
+        "consecutiveMissedPayments": null,
+        "missedPaymentsOverPolicyTerm": null,
+        "missedPaymentsWithinPeriod": null
+      },
+      "lapseExclusionRules": {
+        "lapsePolicyWithProcessingPayment": false
+      }
+    },
+    "waitingPeriod": {
+      "applyTo": {
+        "theFullPolicy": null
+      }
+    },
+    "coolingOffPeriod": {
+      "applyTo": {
+        "theFullPolicy": {
+          "refundType": "all_premiums",
+          "period": 31,
+          "periodType": "days"
+        }
+      }
+    },
+    "policyAnniversaryNotification": null,
+    "policyholder": {
+      "individualsAllowed": true,
+      "individualsIdAllowed": true,
+      "individualsPassportAllowed": false,
+      "individualsCellphoneAllowed": false,
+      "individualsCustomIdAllowed": false,
+      "individualsEmailAllowed": true,
+      "idCountry": "ZA",
+      "companiesAllowed": false,
+      "individualPolicyholderFields": {
+        "address": {
+          "suburb": {
+            "required": true
+          }
+        },
+        "dateOfBirth": {
+          "required": false
+        }
+      }
+    },
+    "beneficiaries": {
+      "makePolicyholderABeneficiary": true,
+      "min": 1,
+      "max": 1,
+      "individualBeneficiaryFields": {
+        "dateOfBirth": {
+          "required": false
+        },
+        "address": {
+          "displayAddress": false
+        }
+      }
+    },
+    "claims": {
+      "checklistItems": [
+        "Has the claim form been fully completed?",
+        "Is the detailed invoice attached?",
+        "Is the proof of payment attached?",
+        "Is the full veterinary history attached (a vaccination certificate is not sufficient)?",
+        "Have all premiums been paid?"
+      ],
+      "documentLabels": [
+        "Claim form",
+        "Invoice",
+        "Proof of payment",
+        "Full vetinary history"
+      ],
+      "enableClaimAssignments": false,
+      "enableLegacyClaimsSchema": true
+    },
+    "billing": {
+      "allowStartDateChange": false,
+      "billBeforeWeekendEnabled": false,
+      "billingFrequency": "monthly",
+      "consecutiveFailedPaymentsAllowed": 4,
+      "currency": "ZAR",
+      "enableBillingOnSandbox": false,
+      "paymentSubmissionLeadTime": 0,
+      "clientStatementReference": "<set_reference>",
+      "combineProRataAndPremium": {
+        "enabled": true,
+        "daysBeforeBilling": 5
+      },
+      "paymentMethodTypes": {
+        "debitOrders": {
+          "enabled": true,
+          "strategy": "best_effort",
+          "naedoPoliciesInArrears": false,
+          "assumeSuccess": {
+            "enabled": true,
+            "daysAfterPaymentDate": 5
+          },
+          "disablePaymentCreationForKeys": []
+        },
+        "card": {
+          "enabled": false,
+          "assumeSuccess": {
+            "enabled": false
+          }
+        },
+        "eft": {
+          "enabled": false,
+          "assumeSuccess": {
+            "enabled": false
+          }
+        },
+        "external": {
+          "enabled": false,
+          "createPayments": false,
+          "assumeSuccess": {
+            "enabled": true,
+            "daysAfterPaymentDate": 5
+          },
+          "disablePaymentCreationForKeys": []
+        },
+        "collectionModules": []
+      },
+      "retryFailedPayments": {
+        "enabled": true,
+        "daysBetweenRetries": 5,
+        "numberOfRetries": 1
+      },
+      "proRataBilling": {
+        "enabled": true,
+        "proRataBillingOnIssue": false,
+        "minimumAmount": 0
+      },
+      "doNotBlockPaymentMethodFailureCodes": {
+        "codes": [],
+        "enabled": false
+      },
+      "minimumPaymentAmount": {
+        "enabled": false
+      }
+    }
+  },
+  "alterationHooks": [
+    {
+      "key": "change_pets",
+      "name": "Update pets"
+    },
+    {
+      "key": "change_cover",
+      "name": "Update cover"
+    },
+    {
+      "key": "change_discounts",
+      "name": "Update discounts"
+    }
+  ],
+  "applicationAlterationHooks": [],
+  "scheduledFunctions": [],
+  "fulfillmentTypes": []
+}

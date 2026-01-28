@@ -1,0 +1,9 @@
+{
+  "name": "demo_pet_cover",
+  "version": "1.0.0",
+  "description": "Root Platform product module: demo_pet_cover",
+  "scripts": {
+    "preview": "node preview/server.js",
+    "sync-docs": "node preview/sync-docs.js"
+  }
+}

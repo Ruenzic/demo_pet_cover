@@ -1,0 +1,37 @@
+[
+  {
+    "key": "h-discount",
+    "type": "section-header",
+    "label": "Discounts",
+    "props": {
+      "headingTag": "h3"
+    }
+  },
+  {
+    "key": "discount_options",
+    "type": "multiple-checkbox",
+    "label": "Select applicable discounts?",
+    "options": [
+      {
+        "label": "Military",
+        "value": "military"
+      },
+      {
+        "label": "Multi Pet",
+        "value": "multi_pet"
+      },
+      {
+        "label": "Affinity Group",
+        "value": "affinity_group"
+      },
+      {
+        "label": "MicroChipped",
+        "value": "micro_chipped"
+      },
+      {
+        "label": "Neutered",
+        "value": "neutered"
+      }
+    ]
+  }
+]

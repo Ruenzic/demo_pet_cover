@@ -1,0 +1,177 @@
+[
+  {
+    "block": {
+      "key": "claim_in_waiting_period",
+      "type": "alert",
+      "color": "danger",
+      "markdown": "Warning: The claim incident date is within the policy's 14-day waiting period."
+    },
+    "show_if": "{{ifCondition (dateDifference claim.block_states.incident_date.value claim.policy.start_date measurement='days') '<' 14}}"
+  },
+  {
+    "block": {
+      "key": "natural_death_claim_in_waiting_period",
+      "type": "alert",
+      "color": "danger",
+      "markdown": "Warning: 6 month natural death waiting period still in effect."
+    },
+    "show_if": "{{if (ifCondition claim.block_states.claim_type.value '==' 'natural death') '&&' (ifCondition (dateDifference claim.block_states.incident_date.value claim.policy.start_date measurement='months') '<' 6)}}"
+  },
+  {
+    "block": {
+      "key": "payout_amount_more_than_sum_assured",
+      "type": "alert",
+      "color": "danger",
+      "markdown": "Warning: The payout amount of {{ divide claim.block_states.payout_amount.value 100 }} is more than the policy sum assured {{divide claim.policy.sum_assured 100}}."
+    },
+    "show_if": "{{if claim.block_states.payout_amount.value '>' claim.policy.sum_assured }}"
+  },
+  {
+    "block": {
+      "key": "date_warning_past",
+      "type": "alert",
+      "color": "warning",
+      "markdown": "Warning: Claims must be logged within 90 days of the incident occurring."
+    },
+    "show_if": "{{ifCondition (dateDifference claim.block_states.incident_date.value claim.policy.start_date measurement='days') '<' 90}}"
+  },
+  {
+    "block": {
+      "key": "claim_details_heading",
+      "type": "markdown",
+      "markdown": "### Claim event details"
+    }
+  },
+  {
+    "block": {
+      "key": "claim_type",
+      "type": "dropdown",
+      "title": "Event type",
+      "options": [
+        {
+          "key": "Complementary treatment",
+          "value": "complementary treatment"
+        },
+        {
+          "key": "Behavioural treatment",
+          "value": "behavioural treatment"
+        },
+        {
+          "key": "Dental treatments",
+          "value": "dental treatment"
+        },
+        {
+          "key": "Theft or stray",
+          "value": "theft or stray"
+        },
+        {
+          "key": "Accidental Death",
+          "value": "accidental death"
+        },
+        {
+          "key": "Natural Death",
+          "value": "natural death"
+        },
+        {
+          "key": "Third-party liability",
+          "value": "third-party liability"
+        }
+      ]
+    }
+  },
+  {
+    "block": {
+      "key": "incident_date",
+      "type": "input.date",
+      "title": "Date of incident"
+    }
+  },
+  {
+    "block": {
+      "key": "incident_description",
+      "type": "input.paragraph",
+      "title": "Description of accident"
+    }
+  },
+  {
+    "block": {
+      "key": "claimed_amount_requested",
+      "min": "1",
+      "type": "input.currency",
+      "title": "Claimed amount requested",
+      "isoCode": "ZAR"
+    }
+  },
+  {
+    "block": {
+      "key": "b-2",
+      "type": "markdown",
+      "markdown": "### Claim payout details"
+    }
+  },
+  {
+    "block": {
+      "key": "payout_description",
+      "type": "input.paragraph",
+      "title": "Description of claim payout"
+    }
+  },
+  {
+    "block": {
+      "key": "payout_amount",
+      "min": "1",
+      "type": "input.currency",
+      "title": "Approved amount to pay out",
+      "isoCode": "ZAR"
+    }
+  },
+  {
+    "block": {
+      "key": "alert_not_approved",
+      "type": "alert",
+      "color": "info",
+      "markdown": "Claim payout process only available once claim has been marked as 'approved'."
+    },
+    "hide_if": "{{ifCondition (ifCondition (ifCondition claim.approval_status '===' 'approved') '||' (ifCondition claim.approval_status '===' 'goodwill')) '&&' (ifCondition (ifCondition claim.claim_status '===' 'pending_payout') '||' (ifCondition claim.claim_status '===' 'paid_out')) }}"
+  },
+  {
+    "block": {
+      "key": "claim_payout_request",
+      "type": "payout_request",
+      "payee": {
+        "type": "policyholder",
+        "amount": "{{ divide (multiply claim.block_states.payout_amount.value  claim.policy.beneficiaries.[0].percentage) 100}}",
+        "percentage": 100,
+        "payment_details": {
+          "type": "eft",
+          "details": {
+            "bank_name": "{{ claim.policy.beneficiaries.0.payment_details.details.bank_name }}",
+            "branch_code": "{{ claim.policy.beneficiaries.0.payment_details.details.branch_code }}",
+            "account_type": "{{ claim.policy.beneficiaries.0.payment_details.details.account_type }}",
+            "account_number": "{{ claim.policy.beneficiaries.0.payment_details.details.account_number }}"
+          }
+        },
+        "policyholder_id": "{{ claim.policy.policyholder_id }}"
+      },
+      "title": "Manage payout",
+      "amount": "{{ claim.block_states.payout_amount.value }}",
+      "description": "Claim reimbursement payment."
+    },
+    "show_if": "{{ifCondition (ifCondition (ifCondition claim.approval_status '===' 'approved') '||' (ifCondition claim.approval_status '===' 'goodwill')) '&&' (ifCondition (ifCondition claim.claim_status '===' 'pending_payout') '||' (ifCondition claim.claim_status '===' 'paid_out')) }}"
+  },
+  {
+    "block": {
+      "key": "alert_info_details",
+      "type": "alert",
+      "color": "light",
+      "markdown": "Update bank details directly on the beneficiary."
+    },
+    "show_if": "{{ifCondition (ifCondition (ifCondition claim.approval_status '===' 'approved') '||' (ifCondition claim.approval_status '===' 'goodwill')) '&&' (ifCondition (ifCondition claim.claim_status '===' 'pending_payout') '||' (ifCondition claim.claim_status '===' 'paid_out')) }}"
+  },
+  {
+    "block": {
+      "key": "d-bottom",
+      "type": "divider"
+    }
+  }
+]
